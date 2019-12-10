@@ -10,5 +10,10 @@ export const navItems: INavData[] = [
     name: 'List',
     url: '/timesheet',
     icon: 'icon-speedometer'
+  },
+  {
+    name: 'GridHttp',
+    url: '/gridserver',
+    icon: 'icon-speedometer'
   }
 ];

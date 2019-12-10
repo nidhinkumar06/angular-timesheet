@@ -14,8 +14,11 @@ export class TimeSheetService {
   constructor(private db: AngularFireDatabase) {
     this.timesheetRef = db.list(this.dbPath);
     console.log('db list0', db.list(this.dbPath));
-    
   }
+
+   addTimeSheet(timeSheetData: TimeSheet): void {
+     this.timesheetRef.push(timeSheetData);
+   }
 
 //   createCustomer(customer: TimeSheet): void {
 //     this.timesheetRef.push(customer);

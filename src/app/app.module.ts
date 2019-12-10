@@ -11,6 +11,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { HttpClientModule } from '@angular/common/http';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -33,6 +34,12 @@ import {
   AppSidebarModule,
 } from '../../dist/@coreui/angular';
 
+import {
+  MdcFabModule,
+  MdcIconModule,
+  MdcMenuModule
+} from '@angular-mdc/web';
+
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 import { LoginComponent } from './views/login/login.component';
@@ -51,7 +58,11 @@ import { LoginComponent } from './views/login/login.component';
     PerfectScrollbarModule,
     AgGridModule.withComponents([]),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule,
+    MdcFabModule,
+    MdcIconModule,
+    MdcMenuModule
   ],
   declarations: [
     AppComponent,

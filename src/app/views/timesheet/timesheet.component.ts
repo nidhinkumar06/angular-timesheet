@@ -1,12 +1,15 @@
 import { TimeSheetService } from './timesheet.service';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, max } from 'rxjs/operators';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: 'timesheet.component.html'
 })
 export class TimeSheetComponent implements OnInit {
+
+  rowClassRules;
 
   columnDefs = [
     {
@@ -33,36 +36,16 @@ export class TimeSheetComponent implements OnInit {
 
   rowData = [];
 
-  // columnDefs = [
-  //   { headerName: 'Make', field: 'make', sortable: true, filter: true },
-  //   { headerName: 'Model', field: 'model', sortable: true, filter: true },
-  //   { headerName: 'Price', field: 'price', sortable: true, filter: true }
-  // ];
-
-  // rowData = [
-  //   { make: 'Toyota', model: 'Celica', price: 35000 },
-  //   { make: 'Ford', model: 'Mondeo', price: 32000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 }
-  // ];
-
-  constructor(private timesheetService: TimeSheetService) { }
+  constructor(private timesheetService: TimeSheetService, private router: Router) {
+    this.rowClassRules = {
+      'leave-days-warning': function(params) {
+        console.log('params', params);
+        const leaveDays = params.data.hrs;
+        return leaveDays === '00:00:00';
+      },
+      'good-works': 'data.hrs > \'08:00:00\' '
+    };
+  }
 
   ngOnInit() {
     this.getTimeSheetList();
@@ -93,6 +76,14 @@ export class TimeSheetComponent implements OnInit {
       )
     ).subscribe(datas => {
       this.rowData = datas;
+
     });
+  }
+
+  add() {
+    const extras = Math.max(...this.rowData.map(data => data.id), 0).toString();
+    console.log("maximum no", extras);
+    
+    this.router.navigateByUrl('/timesheet/add');
   }
 }

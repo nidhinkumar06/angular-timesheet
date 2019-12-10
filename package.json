@@ -29,6 +29,8 @@
   },
   "private": true,
   "dependencies": {
+    "@ag-grid-enterprise/all-modules": "^22.1.0",
+    "@angular-mdc/web": "^3.2.1",
     "@angular/animations": "^9.0.0-rc.0",
     "@angular/common": "^9.0.0-rc.0",
     "@angular/compiler": "^9.0.0-rc.0",

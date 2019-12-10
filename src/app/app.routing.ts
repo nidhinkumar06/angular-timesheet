@@ -25,6 +25,10 @@ export const routes: Routes = [
       {
         path: 'timesheet',
         loadChildren: () => import('./views/timesheet/timesheet.module').then(m => m.TimesheetModule)
+      },
+      {
+        path: 'gridserver',
+        loadChildren: () => import('./views/aggrid-http/aggrid-http.module').then(m => m.AgGridHttpModule)
       }
     ]
   },
