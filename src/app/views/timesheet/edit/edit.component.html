@@ -1,0 +1,174 @@
+<div class="animated fadeIn">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <strong>Edit</strong>
+              </div>
+              <mdc-linear-progress *ngIf="submitted"  secondary="true"></mdc-linear-progress>
+              <div class="card-body">
+                <form [formGroup]='heroForm' (ngSubmit)='onSubmit()'>
+                  <div class="row">
+                    <div class="col-3">
+                      <mdc-select
+                        placeholder="Select Name"
+                        [helperText]="enhancedHelper"
+                        outlined
+                        required
+                        class="custom-select-outline-color"
+                        formControlName="name"
+                      >
+                        <mdc-menu>
+                          <mdc-list>
+                            <mdc-list-item
+                              *ngFor="let name of names"
+                              [value]="name.value"
+                            >
+                              {{ name.viewValue }}
+                            </mdc-list-item>
+                          </mdc-list>
+                        </mdc-menu>
+                      </mdc-select>
+                      <mdc-select-helper-text #enhancedHelper validation
+                        >Name is required</mdc-select-helper-text
+                      >
+                    </div>
+                    <div class="col-3">
+                      <mdc-select
+                        placeholder="Work From"
+                        [helperText]="enhancedHelper"
+                        outlined
+                        required
+                        class="custom-select-outline-color"
+                        formControlName="workfrom"
+                      >
+                        <mdc-menu>
+                          <mdc-list>
+                            <mdc-list-item
+                              *ngFor="let work of workFrom"
+                              [value]="work.value"
+                            >
+                              {{ work.viewValue }}
+                            </mdc-list-item>
+                          </mdc-list>
+                        </mdc-menu>
+                      </mdc-select>
+                      <mdc-select-helper-text #enhancedHelper validation
+                        >Work from is required
+                      </mdc-select-helper-text>
+                    </div>
+                    <div class="col-3">
+                      <mdc-select
+                        placeholder="Select Project"
+                        [helperText]="enhancedHelper"
+                        outlined
+                        required
+                        class="custom-select-outline-color"
+                        formControlName="project"
+                      >
+                        <mdc-menu>
+                          <mdc-list>
+                            <mdc-list-item
+                              *ngFor="let project of projects"
+                              [value]="project.value"
+                            >
+                              {{ project.viewValue }}
+                            </mdc-list-item>
+                          </mdc-list>
+                        </mdc-menu>
+                      </mdc-select>
+                      <mdc-select-helper-text #enhancedHelper validation
+                        >Project is required
+                      </mdc-select-helper-text>
+                    </div>
+                    <div class="col-3">
+                      <mdc-select
+                        placeholder="Select Phase"
+                        [helperText]="enhancedHelper"
+                        outlined
+                        required
+                        class="custom-select-outline-color"
+                        formControlName="phase"
+                      >
+                        <mdc-menu>
+                          <mdc-list>
+                            <mdc-list-item
+                              *ngFor="let phase of phases"
+                              [value]="phase.value"
+                            >
+                              {{ phase.viewValue }}
+                            </mdc-list-item>
+                          </mdc-list>
+                        </mdc-menu>
+                      </mdc-select>
+                      <mdc-select-helper-text #enhancedHelper validation
+                        >Phase is required
+                      </mdc-select-helper-text>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row">
+                    <div class="col-8">
+                      <mdc-form-field fluid>
+                        <mdc-text-field
+                          label="Task worked on"
+                          outlined
+                          required
+                          formControlName="task"
+                        ></mdc-text-field>
+                        <mdc-helper-text validation>*Required</mdc-helper-text>
+                      </mdc-form-field>
+                    </div>
+                    <div class="col-4">
+                      <mdc-form-field fluid>
+                        <mdc-text-field
+                          type="time"
+                          label="Time"
+                          outlined
+                          required
+                          formControlName="hrs"
+                        ></mdc-text-field>
+                        <mdc-helper-text validation>*Required</mdc-helper-text>
+                      </mdc-form-field>
+                    </div>
+                  </div>
+      
+                  <br />
+                  <div class="row">
+                    <div class="col-12">
+                      <mdc-textarea
+                        label="Comments"
+                        characterCounter
+                        maxlength="140"
+                        [helperText]="taCounterHelper"
+                        rows="1"
+                        cols="105"
+                        formControlName="comments"
+                      ></mdc-textarea>
+                      <mdc-helper-text #taCounterHelper validation
+                        >Helper Text</mdc-helper-text
+                      >
+                    </div>
+                  </div>
+                  <br />
+                  <div style="text-align: center">
+                    <button
+                      mdc-button
+                      secondary
+                      raised
+                      type="submit"
+                      [disabled]="!heroForm.valid || buttonDisabled"
+                    >
+                      <mdc-button-label>Update</mdc-button-label>
+                      <mdc-icon>save</mdc-icon>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!--/.col-->
+        </div>
+        <!--/.row-->
+      </div>
+      

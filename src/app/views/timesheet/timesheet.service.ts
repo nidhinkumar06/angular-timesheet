@@ -13,30 +13,26 @@ export class TimeSheetService {
 
   constructor(private db: AngularFireDatabase) {
     this.timesheetRef = db.list(this.dbPath);
-    console.log('db list0', db.list(this.dbPath));
   }
 
-   addTimeSheet(timeSheetData: TimeSheet): void {
-     this.timesheetRef.push(timeSheetData);
+   addTimeSheet(key: string, timeSheetData: TimeSheet): void {
+    //  this.timesheetRef.push(timeSheetData);
+    this.timesheetRef.update(key, timeSheetData);
    }
-
-//   createCustomer(customer: TimeSheet): void {
-//     this.timesheetRef.push(customer);
-//   }
-
-//   updateCustomer(key: string, value: any): Promise<void> {
-//     return this.timesheetRef.update(key, value);
-//   }
-
-//   deleteCustomer(key: string): Promise<void> {
-//     return this.timesheetRef.remove(key);
-//   }
 
   getTimeSheetList(): AngularFireList<TimeSheet> {
     return this.timesheetRef;
   }
 
-//   deleteAll(): Promise<void> {
-//     return this.timesheetRef.remove();
-//   }
+  updateTimeSheet(key: string, value: any): Promise<void> {
+    return this.timesheetRef.update(key, value);
+  }
+
+  deleteTimeSheet(key: string): Promise<void> {
+    return this.timesheetRef.remove(key);
+  }
+
+  deleteAll(): Promise<void> {
+    return this.timesheetRef.remove();
+  }
 }

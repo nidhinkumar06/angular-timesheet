@@ -16,9 +16,12 @@ import {
   MdcListModule,
   MdcRadioModule,
   MdcButtonModule,
-  MdcLinearProgressModule
+  MdcLinearProgressModule,
+  MdcDialogModule
 } from '@angular-mdc/web';
 import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
+import { Data } from '../../app.storage';
 
 @NgModule({
   imports: [
@@ -36,8 +39,10 @@ import { AddComponent } from './add/add.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MdcLinearProgressModule
+    MdcLinearProgressModule,
+    MdcDialogModule
   ],
-  declarations: [ TimeSheetComponent, AddComponent ],
+  declarations: [ TimeSheetComponent, AddComponent, EditComponent ],
+  providers: [Data]
 })
 export class TimesheetModule { }

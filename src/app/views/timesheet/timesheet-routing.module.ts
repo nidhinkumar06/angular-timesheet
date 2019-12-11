@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TimeSheetComponent } from './timesheet.component';
 import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
 
 
 const routes: Routes = [
@@ -24,10 +25,17 @@ const routes: Routes = [
         }
       },
       {
-        path: 'add',
+        path: 'add/:id',
         component: AddComponent,
         data: {
           title: 'Add'
+        }
+      },
+      {
+        path: 'edit/:id',
+        component: EditComponent,
+        data: {
+          title: 'Edit'
         }
       }
     ],

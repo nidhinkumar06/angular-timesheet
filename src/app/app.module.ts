@@ -37,12 +37,14 @@ import {
 import {
   MdcFabModule,
   MdcIconModule,
-  MdcMenuModule
+  MdcMenuModule,
+  MdcDialogModule
 } from '@angular-mdc/web';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 import { LoginComponent } from './views/login/login.component';
+import { DialogAlertComponent } from './views/alert/dialog-alert';
 
 
 @NgModule({
@@ -62,12 +64,17 @@ import { LoginComponent } from './views/login/login.component';
     HttpClientModule,
     MdcFabModule,
     MdcIconModule,
-    MdcMenuModule
+    MdcMenuModule,
+    MdcDialogModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     LoginComponent,
+    DialogAlertComponent
+  ],
+  entryComponents: [
+    DialogAlertComponent
   ],
   providers: [{
     provide: LocationStrategy,

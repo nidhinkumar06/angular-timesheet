@@ -1,17 +1,24 @@
 <div class="animated fadeIn">
-  <ag-grid-angular
-    style="height: 430px;"
-    class="ag-theme-balham"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    [enableRangeSelection]="true"
-    [pagination]="true"
-    [animateRows]="true"
-    [paginationAutoPageSize]="false" 
-    [rowClassRules]="rowClassRules"
-  >
-  </ag-grid-angular>
-  <button mdc-fab position='bottomRight' (click)="add()">
+  <button mdc-button secondary raised *ngIf="canshowEdit" (click)="gotoEdit()" ><mdc-icon>edit</mdc-icon>Edit</button>
+  <button mdc-button danger raised *ngIf="canshowDelete" (click)='gotoDelete()'><mdc-icon>delete</mdc-icon>Delete ({{selectedRows.length}})</button>
+  <div style="padding-top: 10px">
+    <ag-grid-angular
+      style="height: 380px;"
+      class="ag-theme-balham"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [enableRangeSelection]="true"
+      [pagination]="true"
+      [animateRows]="true"
+      [paginationAutoPageSize]="false"
+      [rowClassRules]="rowClassRules"
+      [rowSelection]="rowSelection"
+      (selectionChanged)="onSelectionChanged($event)"
+      (gridReady)="onGridReady($event)"
+    >
+    </ag-grid-angular>
+  </div>
+  <button mdc-fab position="bottomRight" (click)="add()">
     <mdc-icon>add</mdc-icon>
   </button>
 </div>
