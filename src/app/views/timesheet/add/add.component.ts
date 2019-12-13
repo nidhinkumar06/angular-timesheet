@@ -36,7 +36,7 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.heroForm = this.formBuilder.group({
       name: ['', Validators.required],
-      workfrom: ['', Validators.required],
+      workfrom: ['Office', Validators.required],
       project: ['', Validators.required],
       phase: ['', Validators.required],
       task: ['', Validators.required],

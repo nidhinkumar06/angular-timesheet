@@ -4,8 +4,11 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { Data } from '../../app.storage';
 import { Router } from '@angular/router';
-import { MdcDialog, MdcDialogRef, MDC_DIALOG_DATA } from '@angular-mdc/web';
+import { MdcDialog } from '@angular-mdc/web';
 import { DialogAlertComponent } from '../alert/dialog-alert';
+import { User } from '../users/user.model';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Role } from '../../models';
 
 
 @Component({
@@ -20,10 +23,11 @@ export class TimeSheetComponent implements OnInit {
   canshowEdit = false;
   canshowDelete = false;
 
+  currentUser: User;
+
   columnDefs = [
     {
       headerName: 'S.No',
-      field: 'id',
       sortable: true,
       filter: true,
       width: 100,
@@ -32,7 +36,8 @@ export class TimeSheetComponent implements OnInit {
       },
       headerCheckboxSelection: function (params) {
         return params.columnApi.getRowGroupColumns().length === 0;
-      }
+      },
+      valueGetter: (args) => this.getIdValue(args)
     },
     { headerName: 'Date', field: 'Timestamp', width: 150, sortable: true, filter: true },
     { headerName: 'Name', field: 'Name', sortable: true, filter: true },
@@ -47,6 +52,7 @@ export class TimeSheetComponent implements OnInit {
 
   constructor(
     private timesheetService: TimeSheetService,
+    private authService: AuthenticationService,
     private router: Router,
     private data: Data,
     private dialog: MdcDialog
@@ -61,18 +67,31 @@ export class TimeSheetComponent implements OnInit {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  isAdmin(): any {
+    return this.authService.currentUserValue.role === Role.Admin;
+  }
+
+  getIdValue(args: any): any {
+    return parseInt(args.node.id, 10) + 1;
+  }
+
+
 
   getTimeSheetList() {
+    const userName = this.authService.currentUserValue.name;
+    const currentRole = this.authService.currentUserValue.role;
     this.timesheetService.getTimeSheetList().snapshotChanges().pipe(
       map(changes =>
-        changes.map(c => {
+        changes.map((c: any, index: number) => {
           const hrs = c.payload.val().hrs === '-' ? '0' : c.payload.val().hrs;
           const date = new Date(null);
           date.setSeconds(parseInt(hrs, 10));
           const totalHrs = date.toISOString().substr(11, 8);
           return (
             {
+              sno: index + 1,
               id: c.payload.val().id,
               Name: c.payload.val().Name,
               Phase: c.payload.val().Phase,
@@ -87,7 +106,11 @@ export class TimeSheetComponent implements OnInit {
         )
       )
     ).subscribe(datas => {
-      this.rowData = datas;
+      if (currentRole === Role.Admin) {
+        this.rowData = datas;
+      } else {
+        this.rowData = datas.filter(data => data.Name === userName);
+      }
 
     });
   }
@@ -116,7 +139,6 @@ export class TimeSheetComponent implements OnInit {
 
   add(): void {
     const extras = Math.max(...this.rowData.map(data => data.id), 0);
-    // this.router.navigateByUrl('/timesheet/add');
     this.router.navigate(['/timesheet/add', extras]);
   }
 

@@ -4,16 +4,19 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 import { LoginComponent } from './views/login/login.component';
+import { AuthGuard } from './helpers';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+    canActivate: [AuthGuard],
   },
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
@@ -25,6 +28,10 @@ export const routes: Routes = [
       {
         path: 'timesheet',
         loadChildren: () => import('./views/timesheet/timesheet.module').then(m => m.TimesheetModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./views/users/users.module').then(m => m.UsersModule)
       },
       {
         path: 'gridserver',

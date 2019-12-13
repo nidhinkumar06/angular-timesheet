@@ -122,7 +122,7 @@ export class AggridHttpComponent {
 
   }
 
-  onPageSizeChanged(newPageSize) {
+  onPageSizeChanged() {
     const value = document.getElementById('page-size')['value'];
     this.gridApi.paginationSetPageSize(Number(value));
   }

@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
-  <button mdc-button secondary raised *ngIf="canshowEdit" (click)="gotoEdit()" ><mdc-icon>edit</mdc-icon>Edit</button>
-  <button mdc-button danger raised *ngIf="canshowDelete" (click)='gotoDelete()'><mdc-icon>delete</mdc-icon>Delete ({{selectedRows.length}})</button>
+  <button mdc-button secondary raised *ngIf="isAdmin()" [disabled]="canshowEdit" (click)="gotoEdit()" ><mdc-icon>edit</mdc-icon>Edit</button>
+  <button mdc-button danger raised *ngIf="isAdmin() && canshowDelete" (click)='gotoDelete()'><mdc-icon>delete</mdc-icon>Delete ({{selectedRows.length}})</button>
   <div style="padding-top: 10px">
     <ag-grid-angular
       style="height: 380px;"
@@ -13,7 +13,7 @@
       [paginationAutoPageSize]="false"
       [rowClassRules]="rowClassRules"
       [rowSelection]="rowSelection"
-      (selectionChanged)="onSelectionChanged($event)"
+      (selectionChanged)="onSelectionChanged()"
       (gridReady)="onGridReady($event)"
     >
     </ag-grid-angular>

@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -38,19 +39,26 @@ import {
   MdcFabModule,
   MdcIconModule,
   MdcMenuModule,
-  MdcDialogModule
+  MdcDialogModule,
+  MdcLinearProgressModule,
+  MdcTextFieldModule,
+  MdcButtonModule
 } from '@angular-mdc/web';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 import { LoginComponent } from './views/login/login.component';
 import { DialogAlertComponent } from './views/alert/dialog-alert';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
     AppRoutingModule,
     AppAsideModule,
     AppBreadcrumbModule.forRoot(),
@@ -61,11 +69,16 @@ import { DialogAlertComponent } from './views/alert/dialog-alert';
     AgGridModule.withComponents([]),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     HttpClientModule,
     MdcFabModule,
     MdcIconModule,
     MdcMenuModule,
-    MdcDialogModule
+    MdcDialogModule,
+    ReactiveFormsModule,
+    MdcLinearProgressModule,
+    MdcTextFieldModule,
+    MdcButtonModule
   ],
   declarations: [
     AppComponent,

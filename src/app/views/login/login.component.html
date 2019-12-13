@@ -6,32 +6,47 @@
           <div class="card-group">
             <div class="card p-4">
               <div class="card-body">
-                <form>
-                  <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                  <h1 class="text-center">CT - Login</h1>
+                  <!-- <p class="text-muted">Sign In to your account</p> -->
                   <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Email" autocomplete="email" required>
+                    <mdc-form-field fluid>
+                      <mdc-text-field outlined label="Email" formControlName="email" required>
+                        <mdc-icon mdcTextFieldIcon leading
+                          >email</mdc-icon
+                        >
+                      </mdc-text-field>
+                      <mdc-helper-text validation
+                        >Email Required</mdc-helper-text
+                      >
+                    </mdc-form-field>
                   </div>
                   <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-lock"></i></span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="Password" autocomplete="current-password" required>
+                    <mdc-form-field fluid>
+                      <mdc-text-field outlined label="Password" formControlName="password" required>
+                        <mdc-icon mdcTextFieldIcon leading
+                          >lock</mdc-icon
+                        >
+                      </mdc-text-field>
+                      <mdc-helper-text validation
+                        >Password Required</mdc-helper-text
+                      >
+                    </mdc-form-field>
                   </div>
-                  <div class="row">
-                    <div class="col-6">
-                      <button type="button" class="btn btn-primary px-4">Login</button>
+                  <div style="text-align: center">
+                      <button
+                        mdc-button
+                        raised
+                        type="submit"
+                        [disabled]="!loginForm.valid"
+                      >
+                        <mdc-button-label>Login</mdc-button-label>
+                      </button>
                     </div>
-                    <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0">Forgot password?</button>
-                    </div>
-                  </div>
                 </form>
               </div>
             </div>
+            <mdc-linear-progress *ngIf="submitted"  secondary="true"></mdc-linear-progress>
           </div>
         </div>
       </div>

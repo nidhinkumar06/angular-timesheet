@@ -1,0 +1,103 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Add</strong>
+        </div>
+        <mdc-linear-progress
+          *ngIf="submitted"
+          secondary="true"
+        ></mdc-linear-progress>
+        <div class="card-body">
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-6">
+                <mdc-form-field fluid>
+                  <mdc-text-field
+                    label="Name"
+                    outlined
+                    required
+                    formControlName="name"
+                  ></mdc-text-field>
+                  <mdc-helper-text validation>Name Required</mdc-helper-text>
+                </mdc-form-field>
+              </div>
+              <div class="col-6">
+                <mdc-form-field fluid>
+                  <mdc-text-field
+                    label="Mobile No"
+                    outlined
+                    required
+                    formControlName="mobileno"
+                  ></mdc-text-field>
+                  <mdc-helper-text validation
+                    >Mobile No Required</mdc-helper-text
+                  >
+                </mdc-form-field>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-6">
+                <mdc-form-field fluid>
+                  <mdc-text-field
+                    label="Email"
+                    outlined
+                    required
+                    formControlName="email"
+                  ></mdc-text-field>
+                  <mdc-helper-text validation>Email Required</mdc-helper-text>
+                </mdc-form-field>
+              </div>
+              <div class="col-6">
+                <mdc-form-field fluid>
+                  <mdc-text-field
+                    label="City"
+                    outlined
+                    required
+                    formControlName="city"
+                  ></mdc-text-field>
+                  <mdc-helper-text validation>City Required</mdc-helper-text>
+                </mdc-form-field>
+              </div>
+            </div>
+
+            <br />
+            <div class="row">
+              <div class="col-12">
+                <mdc-textarea
+                  label="Address"
+                  characterCounter
+                  maxlength="140"
+                  [helperText]="taCounterHelper"
+                  rows="1"
+                  cols="105"
+                  formControlName="address"
+                ></mdc-textarea>
+                <mdc-helper-text #taCounterHelper validation
+                  >Helper Text</mdc-helper-text
+                >
+              </div>
+            </div>
+            <br />
+            <div style="text-align: center">
+              <button
+                mdc-button
+                secondary
+                raised
+                type="submit"
+                [disabled]="!userForm.valid || buttonDisabled"
+              >
+                <mdc-button-label>Save</mdc-button-label>
+                <mdc-icon>save</mdc-icon>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>
