@@ -40,6 +40,7 @@
     "@angular/platform-browser": "^9.0.0-rc.0",
     "@angular/platform-browser-dynamic": "^9.0.0-rc.0",
     "@angular/router": "^9.0.0-rc.0",
+    "@coreui/angular": "^2.7.1",
     "ag-grid-angular": "^22.1.0",
     "ag-grid-community": "^22.1.0",
     "core-js": "^2.6.10",
